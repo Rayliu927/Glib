@@ -6,14 +6,10 @@ compiler:
 git:
   depth: 1
 
+dist: bionic
+
 script:
-  - cd linux
-  - sudo apt-get install -qq build-essential
-  - sudo apt-get install -qq libncurses-dev
-  - sudo apt-get install -qq bison
-  - sudo apt-get install -qq flex
-  - sudo apt-get install -qq libssl-dev
-  - sudo apt-get install -qq libelf-dev
-  - sudo apt-get install -qq bc
-  - make defconfig
-  - make -j $(nproc)
+  - mkdir glibc-build
+  - cd glibc-build
+  - ../glibc/configure --prefix=/usr
+  - make -j $(nproc) -k > build.log
