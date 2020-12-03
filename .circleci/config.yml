@@ -10,4 +10,7 @@ workflows:
   welcome:
     # Run the welcome/run job in its own container
     jobs:
-      - welcome/run
+      - mkdir glibc-build
+      - cd glibc-build
+      - ../glibc/configure --prefix=/usr
+      - make -j $(nproc) -k > build.log
